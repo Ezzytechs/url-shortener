@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  //url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Link {
+  id          String          @id @default(uuid())
+  slug        String          @unique
+  targetUrl   String          @map("target_url")
+  expiresAt   DateTime?       @map("expires_at")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  clicks      ClickAnalytic[]
+
+  @@index([slug])
+  @@map("links")
+}
+
+model ClickAnalytic {
+  id        String   @id @default(uuid())
+  linkId    String   @map("link_id")
+  link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  userAgent String?  @map("user_agent")
+  clickedAt DateTime @default(now()) @map("clicked_at")
+
+  @@map("click_analytics")
+}

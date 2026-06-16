@@ -1,0 +1,34 @@
+name: Continuous Integration Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  verify:
+    name: Lint, Test & Build Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code Repository
+        uses: actions/checkout@v4
+
+      - name: Initialize Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci
+
+      - name: Run Code Type-Linting Check
+        run: npm run lint
+
+      - name: Execute Automated Test Suite
+        run: npm run test
+
+      - name: Verify Production Compilation Build
+        run: npm run build
