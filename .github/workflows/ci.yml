@@ -24,6 +24,10 @@ jobs:
       - name: Install Project Dependencies
         run: npm ci
 
+      # --- ADDED THIS STEP TO GENERATE THE PRISMA CLIENT TYPES ---
+      - name: Generate Prisma Client Types
+        run: npx prisma generate
+
       - name: Run Code Type-Linting Check
         run: npm run lint
 
