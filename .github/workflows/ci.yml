@@ -10,6 +10,10 @@ jobs:
   verify:
     name: Lint, Test & Build Verification
     runs-on: ubuntu-latest
+    
+    # Global environment variables for this specific job
+    env:
+      DATABASE_URL: "postgresql://mockuser:mockpass@localhost:5432/mockdb?schema=public"
 
     steps:
       - name: Checkout Source Code Repository
@@ -24,7 +28,6 @@ jobs:
       - name: Install Project Dependencies
         run: npm ci
 
-      # --- ADDED THIS STEP TO GENERATE THE PRISMA CLIENT TYPES ---
       - name: Generate Prisma Client Types
         run: npx prisma generate
 
