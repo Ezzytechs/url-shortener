@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
@@ -17,7 +18,6 @@
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "zod": "^4.4.3"
   },
@@ -26,6 +26,7 @@
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.3",
     "@types/supertest": "^7.2.0",
+    "dotenv": "^17.4.2",
     "prisma": "^7.8.0",
     "supertest": "^7.2.2",
     "tsx": "^4.22.4",
