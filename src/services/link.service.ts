@@ -43,7 +43,14 @@ export class LinkService {
 
   async getLinkAndLogClick(slug: string, userAgent: string | undefined) {
     try {
-      const link = await prisma.link.findUnique({ where: { slug } });
+      const link = await prisma.link.findFirst({
+        where: {
+          slug: {
+            equals: slug,
+            mode: "insensitive",
+          },
+        },
+      });
 
       if (!link) return null;
 
